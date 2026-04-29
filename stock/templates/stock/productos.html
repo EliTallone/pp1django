@@ -1,6 +1,29 @@
-<h1>Productos</h1>
+<h1>Control de Stock de Productos</h1>
+
+<a href="{% url 'crear_producto' %}" style="background-color: green; color: white; padding: 10px; text-decoration: none; border-radius: 5px;">
+    + Agregar Nuevo Producto
+</a>
+
+<br><br>
+
 <ul>
     {% for producto in productos %}
-    <li> {{ producto.nombr }} - {{ producto.cantidad }} - ${{ producto.precio }} </li>
+    <li> 
+        <strong>{{ producto.nombre }}</strong> - 
+        Cantidad: {{ producto.cantidad }} - 
+        Precio: ${{ producto.precio }}
+        
+        | <a href="{% url 'editar_producto' producto.id %}">Editar</a>
+        | <a href="{% url 'eliminar_producto' producto.id %}" 
+             style="color: red;" 
+             onclick="return confirm('¿Estás seguro de que querés eliminar este producto?')">
+             Eliminar
+          </a>
+    </li>
+    {% empty %}
+    <li>No hay productos cargados todavía.</li>
     {% endfor %}
 </ul>
+
+<hr>
+<a href="/admin">Ir al Panel de Administrador</a>
