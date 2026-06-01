@@ -1,3 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import UsuarioPersonalizado
 
-# Register your models here.
+# Registramos el usuario personalizado utilizando la configuración nativa de Django
+admin.site.register(UsuarioPersonalizado, UserAdmin)

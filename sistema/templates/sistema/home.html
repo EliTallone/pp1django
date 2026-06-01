@@ -1,2 +1,13 @@
-<h1>Bienvenidos al sistema de Stock :3</h1>
-<a href="/stock/productos/">Ver productos</a>
+{% extends 'sistema/base.html' %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm text-center mt-5">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold text-dark">Bienvenidos al sistema de Stock :3</h1>
+        <p class="col-md-8 mx-auto fs-5 text-muted mt-3">
+            Gestiona tus productos, categorías y usuarios de forma rápida en este práctico universitario.
+        </p>
+        <a href="/stock/productos/" class="btn btn-primary btn-lg mt-4">Ver productos</a>
+    </div>
+</div>
+{% endblock %}

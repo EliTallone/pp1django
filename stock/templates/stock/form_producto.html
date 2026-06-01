@@ -23,6 +23,10 @@
             transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
             margin-bottom: 1rem;
         }
+        /* Ajuste específico para que el input de tipo archivo no quede feo */
+        input[type="file"] {
+            padding: 0.375rem 0.75rem;
+        }
     </style>
 </head>
 <body>
@@ -30,7 +34,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <a href="{% url 'lista_productos' %}" class="btn btn-link text-decoration-none mb-3 text-secondary">
+            <a href="{% url 'stock:productos' %}" class="btn btn-link text-decoration-none mb-3 text-secondary">
                 ← Volver al listado
             </a>
 
@@ -39,7 +43,7 @@
                     <h4 class="mb-0 text-center">{{ titulo }}</h4>
                 </div>
                 <div class="card-body p-4">
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         
                         <div class="form-group">

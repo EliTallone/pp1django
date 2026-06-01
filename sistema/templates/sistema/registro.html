@@ -1,0 +1,35 @@
+{% extends 'sistema/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h3 class="text-center mb-4 fw-bold">Crear Nueva Cuenta</h3>
+                
+                {% if form.errors %}
+                    <div class="alert alert-danger p-2 small" role="alert">
+                        <strong class="d-block mb-1">Por favor, corrija los siguientes errores:</strong>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                • {{ error }}<br>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-2">Registrarse</button>
+                </form>
+                <div class="text-center mt-3">
+                    <p class="mb-0 text-muted small">¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

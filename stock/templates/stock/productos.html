@@ -7,9 +7,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { background-color: #f8f9fa; }
-        .container { max-width: 900px; }
+        .container { max-width: 1000px; } /* Lo agrandamos un poquito para que entre la imagen cómoda */
         .card { border: none; border-radius: 15px; }
         .table thead { background-color: #0d6efd; color: white; }
+        /* Estilo para que las miniaturas de las imágenes no rompan la tabla */
+        .img-miniatura {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
@@ -20,7 +27,7 @@
             <h1 class="fw-bold text-dark m-0">📦 Control de Stock</h1>
             <p class="text-muted">Gestión de inventario y productos</p>
         </div>
-        <a href="{% url 'crear_producto' %}" class="btn btn-success btn-lg shadow-sm">
+        <a href="{% url 'stock:crear_producto' %}" class="btn btn-success btn-lg shadow-sm">
             + Agregar Producto
         </a>
     </div>
@@ -28,10 +35,9 @@
     <div class="card shadow-sm">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-hover mb-0">
-                    <thead>
+                <table class="table table-hover mb-0 align-middle"> <thead>
                         <tr>
-                            <th class="ps-4">Producto</th>
+                            <th class="ps-4">Imagen</th> <th>Producto</th>
                             <th>Categoría</th>
                             <th>Cantidad</th>
                             <th>Precio</th>
@@ -42,6 +48,13 @@
                         {% for producto in productos %}
                         <tr>
                             <td class="ps-4">
+                                {% if producto.imagen %}
+                                    <img src="{{ producto.imagen.url }}" class="img-miniatura shadow-sm border" alt="{{ producto.nombre }}">
+                                {% else %}
+                                    <span class="badge bg-secondary-subtle text-secondary border">Sin foto</span>
+                                {% endif %}
+                            </td>
+                            <td>
                                 <span class="fw-bold text-primary">{{ producto.nombre }}</span>
                             </td>
                             <td>
@@ -59,10 +72,10 @@
                             <td><span class="text-success fw-bold">${{ producto.precio }}</span></td>
                             <td class="text-center pe-4">
                                 <div class="btn-group" role="group">
-                                    <a href="{% url 'editar_producto' producto.id %}" class="btn btn-sm btn-outline-warning">
+                                    <a href="{% url 'stock:editar_producto' producto.id %}" class="btn btn-sm btn-outline-warning">
                                         Editar
                                     </a>
-                                    <a href="{% url 'eliminar_producto' producto.id %}" 
+                                    <a href="{% url 'stock:eliminar_producto' producto.id %}" 
                                        class="btn btn-sm btn-outline-danger" 
                                        onclick="return confirm('¿Seguro que querés eliminar {{ producto.nombre }}?')">
                                         Eliminar
@@ -72,8 +85,7 @@
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="5" class="text-center py-5 text-muted">
-                                <p class="mb-0">No hay productos cargados todavía.</p>
+                            <td colspan="6" class="text-center py-5 text-muted"> <p class="mb-0">No hay productos cargados todavía.</p>
                             </td>
                         </tr>
                         {% endfor %}
@@ -85,7 +97,7 @@
 
     <div class="mt-4 d-flex justify-content-between">
         <a href="/admin" class="btn btn-dark btn-sm">⚙️ Panel Admin</a>
-        <p class="text-muted small">Práctico 2 - Ingeniería de Software</p>
+        <p class="text-muted small">Práctico 3 - Ingeniería de Software</p>
     </div>
 </div>
 

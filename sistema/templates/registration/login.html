@@ -1,0 +1,23 @@
+{% extends 'sistema/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h3 class="text-center mb-4">Iniciar Sesión</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 mt-2">Ingresar</button>
+                </form>
+                <div class="text-center mt-3">
+                    <p class="mb-0">¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate acá</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

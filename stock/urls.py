@@ -1,9 +1,12 @@
 from django.urls import path
 from . import views  # Importamos todas las views
 
+# Agregamos esta línea para registrar el namespace 'stock' que pide el proyecto
+app_name = 'stock'
+
 urlpatterns = [
-    # Ruta para listar (la que ya tenías, pero actualizada para usar views.algo)
-    path('productos/', views.lista_productos, name='lista_productos'),
+    # Cambiamos el name a 'productos' para que machee con tus otras pantallas
+    path('productos/', views.lista_productos, name='productos'),
     
     # Ruta para el formulario de CREAR
     path('productos/nuevo/', views.crear_producto, name='crear_producto'),
